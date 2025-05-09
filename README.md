@@ -47,6 +47,40 @@ Before running the application, make sure the following tools and environment ar
 
 When `spring.jpa.hibernate.ddl-auto=update` is enabled in your configuration, Hibernate will automatically generate the tables based on the JPA entities. If you wish to create the tables manually, here are the SQL statements:
 
+-- This script only contains the table creation statements and does not fully represent the table in the database. Do not use it as a backup.
+
+```
+-- Table Definition
+CREATE TABLE "public"."transactions" (
+"id" uuid NOT NULL,
+"operation_type" varchar NOT NULL CHECK ((operation_type)::text = ANY ((ARRAY['PAYMENT'::character varying, 'TRANSFER'::character varying, 'EXCHANGE'::character varying])::text[])),
+"user_id" uuid,
+"service_id" uuid,
+"transaction_amount" float8 NOT NULL,
+"transaction_currency" varchar NOT NULL,
+"status" varchar NOT NULL CHECK ((status)::text = ANY ((ARRAY['NEW'::character varying, 'FINISHED'::character varying, 'PERFORMING'::character varying, 'CANCELLED'::character varying, 'NOT_PERFORMED'::character varying])::text[])),
+"performed_at" timestamptz,
+"failed_at" timestamptz,
+PRIMARY KEY ("id")
+);
+```
+
+```
+-- This script only contains the table creation statements and does not fully represent the table in the database. Do not use it as a backup.
+
+-- Table Definition
+CREATE TABLE "public"."users" (
+    "id" uuid NOT NULL,
+    "first_name" varchar NOT NULL,
+    "last_name" varchar NOT NULL,
+    "middle_name" varchar,
+    "phone_number" varchar,
+    "status" varchar NOT NULL CHECK ((status)::text = ANY ((ARRAY['ACTIVE'::character varying, 'INACTIVE'::character varying, 'ARCHIVED'::character varying, 'DISABLED'::character varying])::text[])),
+    "balance" float8,
+    PRIMARY KEY ("id")
+);
+```
+
 ### **User Table**
 
 ### Notes

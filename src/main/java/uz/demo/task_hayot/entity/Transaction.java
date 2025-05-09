@@ -31,6 +31,8 @@ import uz.demo.task_hayot.enums.TransactionStatus;
 indexes = {@Index(name = "TransactionIndexBySenderId", columnList = "sender_id")})
 public class Transaction extends AbstractAuditingEntity<UUID> {
 
+//  TODO can be added other parameters like (epos_id, merchant_id, terminal_id, commission and etc)
+
   @Id
   @Column(unique = true)
   private UUID id = UUID.randomUUID();
