@@ -1,0 +1,106 @@
+# Jakarta EE and Spring Data JPA Project
+
+## Overview
+
+This project is a hybrid application built using **Jakarta EE**, **Spring Data JPA**, **Spring MVC**, and **Java 21**. It is designed for enterprise-level development with **Lombok** to eliminate boilerplate code.
+
+## Features
+
+- **Jakarta EE**: For enterprise-grade APIs.
+- **Spring Data JPA**: Simplified data access and persistence.
+- **Spring MVC**: Handles web routing and application logic.
+- **Lombok**: Simplifies repetitive boilerplate code.
+- **Java 21**: Incorporates modern Java features.
+- Relational database support.
+
+## Requirements
+
+Before running the application, make sure the following tools and environment are set up:
+
+- **JDK**: Java 21
+- **Gradle**: Any recent version
+- **Database**: PostgreSQL (or any compatible relational database)
+- **IDE**: IntelliJ IDEA 2025.1.1 Ultimate Edition is recommended
+
+## How to Run the Project
+
+1. **Clone the Repository**:
+   ```bash
+   git clone 
+   cd 
+   ```
+
+2. **Configure the Database**:
+    - Start your PostgreSQL server and create a new database:
+      ```sql
+      CREATE DATABASE your_database_name;
+      ```
+    - Edit the `src/main/resources/application.yml` or `.properties` file to set your database credentials:
+      ```yaml
+      spring:
+        datasource:
+          url: jdbc:postgresql://localhost:5432/your_database_name
+          username: your_database_user
+          password: your_password
+        jpa:
+          hibernate:
+            ddl-auto: update
+      ```
+
+3. **Build the Project**:
+   Use the following command to build the project with Gradle:
+   ```bash
+   ./gradlew clean build
+   ```
+
+4. **Run the Project**:
+   You can run the application using Gradle:
+   ```bash
+   ./gradlew bootRun
+   ```
+   Alternatively, you can also start the application directly through IntelliJ by running the `@SpringBootApplication` main class.
+
+5. **Access the Application**:
+    - Once the application starts, open your browser and navigate to:
+      ```
+      http://localhost:8080
+      ```
+
+## How to Create Tables for Entities
+
+When `spring.jpa.hibernate.ddl-auto=update` is enabled in your configuration, Hibernate will automatically generate the tables based on the JPA entities. If you wish to create the tables manually, here are the SQL statements:
+
+### **User Table**
+
+### Notes
+- Primary keys are configured as `UUID`.
+- Indexes can be added for frequently queried fields like `user_id`.
+
+## Troubleshooting
+
+1. **Database Connection Issues**:
+    - Ensure your PostgreSQL instance is running and the credentials in your `application.yml` are correct.
+
+2. **Port Conflict (8080)**:
+    - To change the port, edit `application.yml` or add the following:
+      ```yaml
+      server:
+        port: 8081
+      ```
+
+3. **Gradle Issues**:
+    - If Gradle dependencies fail to resolve, retry with:
+      ```bash
+      ./gradlew --refresh-dependencies
+      ```
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).
+
+## Contact
+
+- **Author**: Nuriddin Khudayberganov
+- **Email**: khudayberganovnuriddin@gmail.com
+- **GitHub**: 
+
