@@ -16,11 +16,9 @@ public class TransactionResponseConverter extends BasicConverter<Transaction, Tr
     super(
         transaction -> new TransactionResponse(
             transaction.getId(),
-            transaction.getUserId(),
             transaction.getOperationType().name(),
+            transaction.getUserId(),
             transaction.getServiceId(),
-            transaction.getSenderCard(),
-            transaction.getSenderCardExpiry(),
             transaction.getTransactionAmount(),
             transaction.getTransactionCurrency(),
             transaction.getStatus().name(),

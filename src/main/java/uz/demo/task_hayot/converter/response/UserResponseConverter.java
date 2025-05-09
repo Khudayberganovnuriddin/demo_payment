@@ -20,6 +20,7 @@ public class UserResponseConverter extends BasicConverter<User, UserResponse> {
             user.getMiddleName(),
             user.getLastName(),
             user.getPhoneNumber(),
+            user.getBalance(),
             user.getStatus()
         ),
         userResponse -> new User()

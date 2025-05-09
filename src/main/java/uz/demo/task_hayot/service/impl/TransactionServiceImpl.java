@@ -50,18 +50,24 @@ public class TransactionServiceImpl implements TransactionService {
     if (userOptional.isEmpty()){
       throw new RuntimeException("User not found with id: " + request.userId());
     }
+    User user = userOptional.get();
+    if (user.getBalance() < request.amount()){
+      throw new RuntimeException("User balance is not enough");
+    }
 
     Transaction transaction = new Transaction();
-    transaction.setUserId(request.userId());
     transaction.setOperationType(OperationType.PAYMENT);
+    transaction.setUserId(user.getId());
     transaction.setServiceId(request.serviceId());
-    transaction.setSenderCard(request.senderCard());
-    transaction.setSenderCardExpiry(request.senderCardExpiry());
     transaction.setTransactionAmount(request.amount());
     transaction.setTransactionCurrency(request.currency());
     transaction.setStatus(TransactionStatus.NEW);
     transaction.setPerformedAt(LocalDateTime.now());
     Transaction saved = repository.save(transaction);
+
+    user.setBalance(user.getBalance() - request.amount());
+    userRepository.save(user);
+
     return new IdResponse(saved.getId());
   }
 }

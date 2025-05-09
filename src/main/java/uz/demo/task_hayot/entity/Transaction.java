@@ -2,28 +2,18 @@ package uz.demo.task_hayot.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
-import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import uz.demo.task_hayot.enums.OperationType;
 import uz.demo.task_hayot.enums.TransactionStatus;
 
@@ -37,7 +27,8 @@ import uz.demo.task_hayot.enums.TransactionStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "transactions")
+@Table(name = "transactions",
+indexes = {@Index(name = "TransactionIndexBySenderId", columnList = "sender_id")})
 public class Transaction extends AbstractAuditingEntity<UUID> {
 
   @Id
@@ -49,11 +40,7 @@ public class Transaction extends AbstractAuditingEntity<UUID> {
   private OperationType operationType;
 
   private UUID userId;
-
   private UUID serviceId;
-
-  private String senderCard;
-  private String senderCardExpiry;
 
   @Column(nullable = false)
   private Double transactionAmount;

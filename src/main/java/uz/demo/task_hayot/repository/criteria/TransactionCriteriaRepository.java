@@ -25,7 +25,7 @@ public class TransactionCriteriaRepository {
   public List<Transaction> retrieveTransactions(TransactionCriteria criteria) {
     Specification<Transaction> specs = TransactionSpecs.filterByPerformedAt(criteria.getDateFrom(),
             criteria.getDateTo())
-        .and(TransactionSpecs.filterByUserId(criteria.getUserId()));
+        .and(TransactionSpecs.filterBySenderId(criteria.getUserId()));
     return repository.findAll(specs);
   }
 }

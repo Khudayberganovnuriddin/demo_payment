@@ -1,4 +1,4 @@
-# Jakarta EE and Spring Data JPA Project
+# Spring Boot Project
 
 ## Overview
 
@@ -24,29 +24,6 @@ Before running the application, make sure the following tools and environment ar
 
 ## How to Run the Project
 
-1. **Clone the Repository**:
-   ```bash
-   git clone 
-   cd 
-   ```
-
-2. **Configure the Database**:
-    - Start your PostgreSQL server and create a new database:
-      ```sql
-      CREATE DATABASE your_database_name;
-      ```
-    - Edit the `src/main/resources/application.yml` or `.properties` file to set your database credentials:
-      ```yaml
-      spring:
-        datasource:
-          url: jdbc:postgresql://localhost:5432/your_database_name
-          username: your_database_user
-          password: your_password
-        jpa:
-          hibernate:
-            ddl-auto: update
-      ```
-
 3. **Build the Project**:
    Use the following command to build the project with Gradle:
    ```bash
@@ -63,7 +40,7 @@ Before running the application, make sure the following tools and environment ar
 5. **Access the Application**:
     - Once the application starts, open your browser and navigate to:
       ```
-      http://localhost:8080
+      http://localhost:8081
       ```
 
 ## How to Create Tables for Entities

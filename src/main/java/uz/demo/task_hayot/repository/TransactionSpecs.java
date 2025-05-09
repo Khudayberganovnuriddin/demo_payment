@@ -22,9 +22,9 @@ public final class TransactionSpecs {
         : cb.conjunction();
   }
 
-  public static Specification<Transaction> filterByUserId(UUID userId) {
+  public static Specification<Transaction> filterBySenderId(UUID userId) {
     return (root, query, cb) -> userId != null
-        ? cb.equal(root.get("userId"), userId)
+        ? cb.equal(root.get("senderId"), userId)
         : cb.conjunction();
   }
 }

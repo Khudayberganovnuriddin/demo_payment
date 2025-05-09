@@ -9,6 +9,6 @@ import uz.demo.task_hayot.enums.UserStatus;
  * @since : 09/05/25 / 11:48
  */
 public record UserResponse(UUID id, String firstName, String middleName, String lastName,
-                           String phoneNumber, UserStatus status) implements Serializable {
+                           String phoneNumber, Double balance, UserStatus status) implements Serializable {
 
 }

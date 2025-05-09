@@ -26,8 +26,7 @@ import uz.demo.task_hayot.enums.UserStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users",
-    indexes = {@Index(name = "UserIndexByPhoneNumber", columnList = "phone_number")})
+@Table(name = "users")
 public class User extends AbstractAuditingEntity<UUID> {
 
   @Serial
@@ -48,6 +47,9 @@ public class User extends AbstractAuditingEntity<UUID> {
 
   @Column(name = "phone_number")
   private String phoneNumber;
+
+  @Column(name = "balance")
+  private Double balance = 0.0;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "status", nullable = false)
