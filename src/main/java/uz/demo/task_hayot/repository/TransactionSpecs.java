@@ -24,7 +24,7 @@ public final class TransactionSpecs {
 
   public static Specification<Transaction> filterBySenderId(UUID userId) {
     return (root, query, cb) -> userId != null
-        ? cb.equal(root.get("senderId"), userId)
+        ? cb.equal(root.get("userId"), userId)
         : cb.conjunction();
   }
 }
