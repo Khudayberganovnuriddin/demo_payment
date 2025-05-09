@@ -113,5 +113,5 @@ This project is licensed under the [MIT License](./LICENSE).
 
 - **Author**: Nuriddin Khudayberganov
 - **Email**: khudayberganovnuriddin@gmail.com
-- **GitHub**: 
+- **GitHub**: https://github.com/Khudayberganovnuriddin/demo_payment
 
