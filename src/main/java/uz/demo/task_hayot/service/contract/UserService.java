@@ -17,7 +17,6 @@ public interface UserService {
 
   Response<List<UserResponse>> retrieveUsers();
 
-
   Response<UserCreateResponse> createUser(UserCreateRequest request);
 
   Response<IdResponse> updateUser(UUID id, UserUpdateRequest request);
