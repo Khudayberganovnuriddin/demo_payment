@@ -43,6 +43,74 @@ Before running the application, make sure the following tools and environment ar
       http://localhost:8081
       ```
 
+## Running the Application with Docker and Docker Compose
+
+### Prerequisites
+Ensure the following are installed and set up on your local system:
+- **Docker**: Version 20.10 or later
+- **Docker Compose**: Version 1.29 or later
+
+### Step 1: Build and Start the Application
+1. Navigate to the project root directory where the `Dockerfile` and `docker-compose.yml` reside.
+2. Run the following command to build and start the containers:
+   ```bash
+   docker-compose up --build
+   ```
+   This command will:
+   - Build the application using the multi-stage `Dockerfile`.
+   - Start two containers: the application and a PostgreSQL database.
+
+   > **Note**: The application runs on `http://localhost:8081` and is connected to the database running on `localhost:5432`.
+
+### Step 2: Verify the Application
+1. Open a web browser and navigate to:
+   ```
+   http://localhost:8081
+   ```
+   to access the application.
+2. To ensure the database connection is live, use any database client (e.g., pgAdmin, DBeaver) and connect to the database with the following credentials:
+   - Host: `localhost`
+   - Port: `5432`
+   - Username: `postgres`
+   - Password: `hayot_db`
+   - Database: `postgres`
+
+### Step 3: Stopping the Application
+To stop the containers, press `Ctrl+C` in the terminal where `docker-compose` is running. Alternatively, you can stop all running containers with:
+
+
+### Step 4: Persistent Database Volumes
+The `volumes` section in `docker-compose.yml` ensures the database data persists even when the container is stopped or removed:
+- Volume Name: `postgres_data`
+- Path: `/var/lib/postgresql/data` in the container
+  This allows you to retain your development database data.
+
+### Additional Notes
+1. **Environment Variables**:
+   All database connection details are provided via environment variables in `docker-compose.yml`. If needed, update these values before starting the application.
+2. **Health Checks**:
+   Ensure that the Postgres container starts and is healthy before the application container. If needed, you can modify the `depends_on` section for additional health checks in advanced production setups.
+3. **Exposed Ports**:
+   - App: `8081`
+   - PostgreSQL Database: `5432`
+
+### Troubleshooting
+1. **Port Conflicts**:
+   - If port `8081` or `5432` is already in use, edit the `ports` section in `docker-compose.yml` to use different host ports, e.g.:
+     ```yaml
+     app:
+       ports:
+         - "8082:8081"
+     postgres:
+       ports:
+         - "5433:5432"
+     ```
+2. **Docker Networking Issues**:
+   - If the application container cannot connect to the database, ensure the `SPRING_DATASOURCE_URL` matches the `postgres` service name in `docker-compose.yml`.
+
+### Cleaning Up Docker Resources
+To remove all containers, networks, and volumes used by the project:
+
 ## How to Create Tables for Entities
 
 When `spring.jpa.hibernate.ddl-auto=update` is enabled in your configuration, Hibernate will automatically generate the tables based on the JPA entities. If you wish to create the tables manually, here are the SQL statements:
